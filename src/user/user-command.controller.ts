@@ -17,7 +17,6 @@ export class UserCommandController {
 
   @Post()
   @ApiBody({ type: ModifyUserDto })
-  @ApiCreatedResponse({ type: GetUserDto })
   public CreateUser(@Body() data: ModifyUserDto): Promise<GetUserDto> {
     return this.commandBus.execute(new CreateUserCommand(data));
   }
@@ -27,12 +26,12 @@ export class UserCommandController {
   @ApiBody({ type: ModifyUserDto })
   @ApiOkResponse({ type: GetUserDto })
   public UpdateUser(@Req() req: IRequestUser, @Body() data: ModifyUserDto): Promise<GetUserDto> {
-    return this.commandBus.execute(new UpdateUserCommand(req.user.data.id, data));
+    return this.commandBus.execute(new UpdateUserCommand(req.user, data));
   }
 
   @Delete(':id')
   @ApiParam({ name: 'id' })
   public RemoveUser(@Req() req: IRequestUser) {
-    return this.commandBus.execute(new RemoveUserCommand(req.user.data.id));
+    return this.commandBus.execute(new RemoveUserCommand(req.user));
   }
 }

@@ -1,25 +1,14 @@
-import { CommandHandler, IQueryHandler } from '@nestjs/cqrs';
-import { InjectModel } from '@nestjs/sequelize';
-import { DatabaseService } from 'src/database/database.service';
-import { GetUserDto } from 'src/user/dto/get.dto';
-import { User } from 'src/user/entities/user.entity';
+import { CommandHandler, EventPublisher, IQueryHandler } from '@nestjs/cqrs';
+import { UserAggregate } from 'src/user/models/user.model';
 import { CreateUserCommand } from './create-user.command';
 
 @CommandHandler(CreateUserCommand)
 export class CreateUserHandler implements IQueryHandler<CreateUserCommand> {
-  public constructor(
-    @InjectModel(User) private readonly userModel: typeof User,
-    private readonly databaseService: DatabaseService
-  ) {}
+  public constructor(private readonly publisher: EventPublisher) {}
 
-  public async execute(command: CreateUserCommand): Promise<GetUserDto> {
-    let userEntity: User;
-    try {
-      userEntity = await this.userModel.create(command.data, { raw: true });
-    } catch (err) {
-      this.databaseService.HandleDatabaseError(err);
-    }
-
-    return <GetUserDto>userEntity;
+  public async execute(command: CreateUserCommand) {
+    const user = this.publisher.mergeObjectContext(new UserAggregate(undefined));
+    user.create(command.data);
+    user.commit();
   }
 }

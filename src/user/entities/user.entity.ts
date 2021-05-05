@@ -36,10 +36,6 @@ export class User extends Model<User> {
   @Column({ type: DataType.BOOLEAN, allowNull: false, defaultValue: false })
   public emailNotification: boolean;
 
-  public ComparePassword(password: string): boolean {
-    return compareSync(password, this.password);
-  }
-
   @BeforeCreate
   @BeforeUpdate
   public static hashPassword(user: User): void {

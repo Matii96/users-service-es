@@ -1,11 +1,11 @@
 import { CanActivate, ExecutionContext, Injectable, NotFoundException } from '@nestjs/common';
 import { IRequestUser } from '../interfaces/request.interface';
 import { UserAggregate } from '../models/user.model';
-import { UserRepository } from '../repository/user.repository';
+import { UserRepo } from '../repository/user.repository';
 
 @Injectable()
 export class AccessUser implements CanActivate {
-  public constructor(private readonly userRepository: UserRepository) {}
+  public constructor(private readonly userRepository: UserRepo) {}
 
   private CheckAccess(id: string): Promise<UserAggregate> {
     return new Promise(async (resolve, reject) => {
