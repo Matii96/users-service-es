@@ -4,9 +4,10 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { Event } from './repository/event.entity';
 import { EventStoreController } from './event-store.controller';
 import { EventStoreService } from './event-store.service';
+import { UserEntities } from 'src/user/entities';
 
 @Module({
-  imports: [CqrsModule, SequelizeModule.forFeature([Event])],
+  imports: [CqrsModule, SequelizeModule.forFeature([Event, ...UserEntities])],
   controllers: [EventStoreController],
   providers: [EventStoreService]
 })
