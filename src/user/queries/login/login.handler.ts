@@ -13,7 +13,6 @@ export class LoginHandler implements IQueryHandler<LoginQuery> {
 
   public async execute(query: LoginQuery): Promise<LoginDto> {
     const user = await this.userRepository.findByLogin(query.data.nameOrEmail);
-
     if (!user || !user.comparePassword(query.data.password)) {
       throw new UnauthorizedException();
     }

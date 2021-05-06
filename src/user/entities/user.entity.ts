@@ -1,5 +1,5 @@
 import { Model, DataType, Column, Table, BeforeCreate, BeforeUpdate } from 'sequelize-typescript';
-import { hashSync, compareSync } from 'bcrypt';
+import { hashSync } from 'bcrypt';
 import config from 'config';
 
 @Table

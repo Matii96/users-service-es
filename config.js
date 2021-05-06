@@ -1,17 +1,8 @@
 const { resolve } = require('path');
 
 exports.default = {
-  port: 3100,
+  port: 3200,
   dateFormat: 'DD MMM YY, H:mm:ss',
-  logs: {
-    directory: resolve(__dirname, 'logs'),
-    filename: 'logfile.log',
-    handleExceptions: true,
-    json: false,
-    maxsize: 5242880, // 5MB
-    maxFiles: 25,
-    colorize: false
-  },
   storageLimits: {
     userLoginHistory: 2
   },

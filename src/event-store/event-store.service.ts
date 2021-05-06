@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { IEvent } from '@nestjs/cqrs';
 import { InjectModel } from '@nestjs/sequelize';
 import { GetEventDto } from './dto/get.dto';
 import { Event } from './repository/event.entity';
@@ -14,5 +15,9 @@ export class EventStoreService {
   public async List() {
     const events = await this.events.findAll({ attributes: ['id', 'name', 'json', 'createdAt'] });
     return events.map(this.Get);
+  }
+
+  public async RegisterEvent(event: IEvent) {
+    await this.events.create({ name: event.constructor.name, json: event });
   }
 }

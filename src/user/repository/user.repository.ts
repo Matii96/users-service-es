@@ -28,7 +28,8 @@ export class UserRepo {
         [Op.or]: [{ name: nameOrEmail }, { email: nameOrEmail }],
         password: { [Op.ne]: null },
         active: true
-      }
+      },
+      raw: true
     });
     if (!userEntity) {
       throw new UnauthorizedException();

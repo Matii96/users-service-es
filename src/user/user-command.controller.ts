@@ -17,15 +17,14 @@ export class UserCommandController {
 
   @Post()
   @ApiBody({ type: ModifyUserDto })
-  public CreateUser(@Body() data: ModifyUserDto): Promise<GetUserDto> {
+  public CreateUser(@Body() data: ModifyUserDto) {
     return this.commandBus.execute(new CreateUserCommand(data));
   }
 
   @Put(':id')
   @ApiParam({ name: 'id' })
   @ApiBody({ type: ModifyUserDto })
-  @ApiOkResponse({ type: GetUserDto })
-  public UpdateUser(@Req() req: IRequestUser, @Body() data: ModifyUserDto): Promise<GetUserDto> {
+  public UpdateUser(@Req() req: IRequestUser, @Body() data: ModifyUserDto) {
     return this.commandBus.execute(new UpdateUserCommand(req.user, data));
   }
 

@@ -3,7 +3,7 @@ import { UserCreatedEvent } from './user-created.event';
 import { UserRepo } from 'src/user/repository/user.repository';
 
 @EventsHandler(UserCreatedEvent)
-export class UserDataUpdatedHandler implements IEventHandler<UserCreatedEvent> {
+export class UserCreatedHandler implements IEventHandler<UserCreatedEvent> {
   public constructor(private readonly userRepository: UserRepo) {}
 
   public async handle(event: UserCreatedEvent) {
