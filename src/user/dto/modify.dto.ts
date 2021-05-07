@@ -44,7 +44,7 @@ export class ModifyUserDto {
   @IsOptional()
   emailNotification: boolean;
 
-  @ApiProperty({ required: false, default: false })
+  @ApiProperty({ required: false, default: true })
   @IsBoolean()
   @IsOptional()
   active: boolean;

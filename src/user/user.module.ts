@@ -9,10 +9,11 @@ import { UserCommandHandlers } from './commands';
 import { UserQueryHandlers } from './queries';
 import { UserEventHandlers } from './events';
 import { UserEntities } from './entities';
+import { UserSagas } from './sagas/user.sagas';
 
 @Module({
   imports: [CqrsModule, SequelizeModule.forFeature(UserEntities), DatabaseModule],
   controllers: [UserQueryController, UserCommandController],
-  providers: [UserRepo, ...UserCommandHandlers, ...UserQueryHandlers, ...UserEventHandlers]
+  providers: [UserRepo, ...UserCommandHandlers, ...UserQueryHandlers, ...UserEventHandlers, UserSagas]
 })
 export class UserModule {}

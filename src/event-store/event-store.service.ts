@@ -34,8 +34,9 @@ export class EventStoreService {
 
     // Get events up to given moment
     const storeEvents = await this.events.findAll({
-      attributes: ['id', 'name', 'json', 'createdAt'],
-      where: { createdAt: { [Op.lte]: upTo } }
+      attributes: ['name', 'json'],
+      where: { createdAt: { [Op.lte]: upTo } },
+      order: [['createdAt', 'ASC']]
     });
 
     // Publish events from the store again
