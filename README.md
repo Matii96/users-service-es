@@ -26,7 +26,7 @@
 
 ## Description
 
-Example [Nest](https://github.com/nestjs/nest) project for [CQRS Article](https://medium.com/@matii96/cqrs-vs-classical-n-layer-application-1ecb74188d14).
+Example [Nest](https://github.com/nestjs/nest) project for [Demystifying Event Sourcing](https://medium.com/@matii96/demystifying-event-sourcing-43ac6bea4b09).
 
 ## Installation
 
